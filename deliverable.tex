@@ -1,0 +1,187 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CoEvolution Deliverable Template
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{report}
+
+\usepackage{hyperride}		% CoEvolution specific definitions and styles  
+\usepackage[utf8]{inputenc}	% UTF8 package
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}		% common special chars
+\usepackage{amsmath}		% math formula
+\usepackage{fancybox}
+\usepackage{anyfontsize}	% fonts
+\usepackage{lipsum}
+\usepackage{cleveref}
+%\setcounter{tocdepth}{5} 
+\usepackage[printonlyused]{acronym}
+\hypersetup{ %  Do not change these settings-----------
+	pdftitle={[Title as appears in the DoA]},
+	pdfauthor={[Names of co-authors (partners short names)]},
+	pdfkeywords={[List of free keywords relevant to the deliverable]},
+}
+
+\graphicspath{ {graphics/} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{defs}
+
+% CHANGE %'s below to make subsection headings visible/invisible in TOC
+%\newcommand{\xsubsubsection}[1]{\subsection{#1}}
+%\newcommand{\xsubsubsection}[1]{\subsubsection{#1}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% URL style same as regular text
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+\urlstyle{same}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Deliverable Information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Project Meta Information
+\ProjectFullTitle{A Comprehensive Trustworthy Framework for Connected Machine Learning and Secure Interconnected AI Solutions}
+\ProjectAcronym{CoEvolution}
+\ProjectRefNo{101168560}
+
+% Work Package Number and Title (according to DoA)
+\delivWP{WPx} 
+\delivWPName{[Title as appears in the DoA]} 
+
+% Deliverable Number and Title (according to DoA)
+\delivNumber{Dx.y}
+\delivName{[Title as appears in the DoA]}
+
+% DOI Number (will be provided by the coordinator)
+% Do not set anything here ----------------------------
+\doiNumber{} % leave empty if no DOI Number is provided
+
+% Deliverable Short Title
+\delivShortTile{[Short title for deliverable document]}
+
+% Deliverable Responsible Partner
+\delivResponsible{[Responsible partner (participant short name)]} 
+
+% Deliverable Version, Contractual and Actual Date, Dissemination Level, Type
+\delivVersion{vn.n}
+\ContractualDate{dd/mm/yyyy}
+\ActualDate{dd/mm/yyyy}
+\delivDissLevel{PU} % PU, SEN
+\delivType{[Report, Data Management Plan, Demonstrator, Other]}
+
+% List of Main Authors (usually from the responsible partner)
+\delivAuthor{[Name(s) of the Deliverable Leader(s) (participant short name(s)]}
+
+% List of Co-Authors (all other co-authors should be listed here)
+\delivFPAuthor{[Names of co-authors (participants short names)]}
+
+%%%%%%%%%%%%%%%% Reviewers
+\delivReviewers{[Names of reviewers (participants short names)]}
+
+
+% Provision of Keywords (about 5-10)
+\delivKeywords{[List of free keywords relevant to the deliverable]}
+
+% Deliverable Status
+\delivStatus{d} %% d = draft, f = final, s = submitted
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Change Log
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\istChange{dd/mm/yyyy}{v1.0}{Name (participant short name)}{Draft report template}
+%This is an example
+%\istChange{31/12/2024}{v0.2}{Antonis Makris (ICCS), Konstantinos Tserpes (ICCS)}{Changes Section 2}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cover Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makecover
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\fancypagestyle{plain}{}
+\settableofcontents
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% List of Figures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\setlistoffigures
+\listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% List of Tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\setlistoftables
+\listoftables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% List of Equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \clearpage
+% \setlistofequations
+% \list
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% List of Abbreviations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{sections/abbreviations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Deliverable Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{sections/summary}
+\input{sections/introduction}
+\input{sections/mainbodyofthedeliverable}
+\input{sections/conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% References
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{literature/references}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\input{sections/appendix-a}
+\input{sections/appendix-b}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Back Page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makedisclaimer
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

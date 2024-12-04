@@ -1,0 +1,369 @@
+%% $Id: istprog.sty,v 1.1 2006/10/17 11:13:53 poller Exp $
+%%			History:
+%%			Tue Dec  4 10:26:29 2001:  CM tweaked to stop tables messing up
+%%			Tue Dec  4 10:35:09 2001:  CM hacked again to fix page height
+%%			Tue Nov  16         2004:  OL various changes for TALK
+%%			Wed Nov 17 15:05:09 2004:  TB more changes for TALK
+%%			2014/01/10 Adaptations for Metalogue
+%%			2019/05/31 Adaptations for Embeddia
+%%			2020/05/18 Adaptations for ERIGrid 2.0 (TS)
+%%			2020/05/18 Adaptations for HYPERRIDE (TS)
+
+%\usepackage{xstring}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{stringstrings}
+\usepackage{ifthen}
+\usepackage{amssymb}
+
+% table of content alias
+\newcommand{\maketoc}{
+	\thispagestyle{empty}\pagenumbering{roman}\tableofcontents\newpage\pagenumbering{arabic}
+}
+
+% redefine elements styles
+\@ifclassloaded{report}{
+	\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+          {-3.5ex \@plus -1ex \@minus -.2ex}%
+          {2.3ex \@plus.2ex}%
+          {\normalfont\fontsize{18}{23}\sffamily\bfseries\color{hyperrideblue}}%
+	}
+
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+	          {-3.5ex \@plus -1ex \@minus -.2ex}%
+                  {2.3ex \@plus.2ex}
+		{\normalfont\fontsize{14}{18}\sffamily\bfseries\color{hyperrideblue}}}
+
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+	          {-3.5ex \@plus -1ex \@minus -.2ex}%
+                  {2.3ex \@plus.2ex}
+		{\normalfont\fontsize{12}{16}\sffamily\bfseries\color{hyperrideblue}}}
+
+% \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\z@}%
+             % {3.25ex \@plus1ex \ at minus.2ex}%
+             % {-1em}%
+             % {\normalfont\normalsize\sffamily\bfseries}}
+}
+
+%%% Deliverable information sheet.
+
+\newcommand{\GetDeliverableID}{%
+\capitalizewords[e]{\deliv@stitle}
+\alphabetic[e]{\thestring}
+\edef\deliv@captitle{\thestring}
+\testmatchingchar{\deliv@status}{1}{d}
+CoEvolution-\convertchar{\deliv@number}{.}{}-\noblanks{\deliv@captitle}-\deliv@status\ifmatchingchar{-\deliv@version}\else{}\fi
+%\IfBeginWith{\deliv@status}{d}{-\deliv@version}{}
+}
+
+
+% istdis project refs
+\newcommand{\istdis}{
+  {\fontsize{12}{15}\bf\color{hyperrideblue}Deliverable Information}\\[1.5ex] 
+  \setlength{\parindent}{0pt}
+  \def\arraystretch{1.25}
+  \arrayrulecolor{hyperridegray}
+  {\fontsize{9}{11}\selectfont
+  \begin{tabular}[t]{!{\color{hyperridegray}\vrule}p{.25\linewidth}!{\color{hyperridegray}\vrule}p{.6885\linewidth}!{\color{hyperridegray}\vrule}}
+    \rowcolor{hyperridegray}\multicolumn{2}{c}
+    {\rule{0pt}{2.5ex}\color{white}\bf Deliverable Administrative Information} \\
+    \rowcolor{white}
+    Project Acronym: & CoEvolution \\
+    \rowcolor{hyperridelightergray}
+    Project Number: & 101168560 \\
+    \rowcolor{white}
+    Deliverable Number: & \deliv@number\\
+    \rowcolor{hyperridelightergray}
+    Deliverable Full Title: & \parbox{\linewidth}{\deliv@name} \\
+    \rowcolor{white}
+    Deliverable Short Title: & \deliv@stitle \\
+    \rowcolor{hyperridelightergray}
+    Document Identifier: & \GetDeliverableID{} \\
+    \rowcolor{white}
+    Lead Participant: & \deliv@owner \\
+    \rowcolor{hyperridelightergray}
+    Version: & \deliv@version \\
+    \rowcolor{white}
+    Due Date: & \deliv@contrdate \\
+	\rowcolor{hyperridelightergray}
+    Submission Date: & \deliv@actdate \\
+    \rowcolor{white}
+    Dissemination Level: & \deliv@disslevel \\
+    \rowcolor{hyperridelightergray}
+    Deliverable Type: & \deliv@type \\
+    \rowcolor{white}
+    Lead Editor(s): & \deliv@authors \\
+    \rowcolor{hyperridelightergray}
+    Author(s):& \deliv@FPauthors \\
+    \rowcolor{white}
+    Reviewers:& \deliv@revier \\
+    \rowcolor{hyperridelightergray}
+	Keywords: & \deliv@keywords \\
+    \rowcolor{white}
+    Status: & \deliv@status@table \\
+    \hline
+  \end{tabular}
+}\\[3ex]
+}
+
+\newcommand{\istmakechangelog} {%
+  \InputIfFileExists {\jobname.chl}{}{%
+  \ClassWarning{h2020proposal}{Change log not complete yet. Recompile to include all data.}}%
+}%
+
+
+\newcommand{\writechlog}{
+	% create chlog table on auxiliary lwp file
+	\setcounter{@row}{0} \newwrite\chlogfile
+	\immediate\openout\chlogfile=\jobname.chl
+	\immediate\write\chlogfile{%
+		{\noexpand\fontsize{12}{15}\noexpand\bf\noexpand\color{hyperrideblue}Deliverable Revisions}\noexpand\\[1.5ex] 
+		\noexpand\setlength{\noexpand\parindent}{0pt}
+		\noexpand\def\noexpand\arraystretch{1.00}
+		\noexpand\def\noexpand\clinecolor{hyperridegray}
+		\noexpand\begin{tabular}[t]{!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.12\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.10\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.3\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}p{.364\noexpand\linewidth}!{\noexpand\color{\noexpand\clinecolor}\noexpand\vrule}}
+			\noexpand\rowcolor{hyperridegray}
+			\noexpand\footnotesize\noexpand\rule{0pt}{2.5ex}\noexpand\color{white}\noexpand\bf Date &
+			\noexpand\footnotesize\noexpand\rule{0pt}{2.5ex}\noexpand\color{white}\noexpand\bf Version & 
+			\noexpand\footnotesize\noexpand\rule{0pt}{2.5ex}\noexpand\color{white}\noexpand\bf List of Contributor(s) & 
+			\noexpand\footnotesize\noexpand\rule{0pt}{2.5ex}\noexpand\color{white}\noexpand\bf Summary of Changes \noexpand\arrayrulecolor{hyperridegray}\noexpand\def\noexpand\clinecolor{hyperridegray}\noexpand\\ \noexpand\hline}
+		\whiledo{\value{@row}<\value{@changecount}}{%
+			\stepcounter{@row}
+			\ifodd\value{@row}\def\shadeofgray{white}\else\def\shadeofgray{hyperridelightergray}\fi
+			\immediate\write\chlogfile{%
+				\noexpand\rowcolor{\shadeofgray}\noexpand\footnotesize\csname @changedate\arabic{@row}\endcsname &
+				\noexpand\footnotesize\csname @changeversion\arabic{@row}\endcsname &
+				\noexpand\footnotesize\csname @changeauthor\arabic{@row}\endcsname &
+				\noexpand\footnotesize\csname @changesummary\arabic{@row}\endcsname \noexpand\\
+			}
+		}
+	\immediate\write\chlogfile{\noexpand\hline \noexpand\end{tabular}}
+	\closeout\chlogfile
+}
+
+\AtEndDocument{%
+ \writechlog 
+  }
+
+% disclaimer
+\newcommand{\makedisclaimer}{
+	\cleardoublepage
+	\thispagestyle{empty}
+	\ThisCenterWallPaper{1}{graphics/hyperride-coverbkg}
+	
+	\vspace*{4.5cm}
+
+    {\fontsize{12}{15}\bf\color{hyperrideblue}Consortium}\\[-1ex] 
+
+    % Table with 4 columns and 15 rows
+    \begin{center}
+    \renewcommand{\arraystretch}{1} % Adjust row height
+    \begin{tabular}{|l|>{\raggedright}p{6cm}|l|l|}
+        \hline
+      \rowcolor{gray!30}  \textbf{Part. No.} & \textbf{Participant Organization Name} & \textbf{Part. Short Name} & \textbf{Country} \\ \hline
+        1   & EREVNITIKO PANEPISTIMIAKO INSTITOUTO SYSTIMATON EPIKOINONION KAI YPOLOGISTON                & ICCS  & GREECE  \\ \hline
+        2  & ATHINA-EREVNITIKO KENTRO KAINOTOMIAS STIS TECHNOLOGIES TIS PLIROFORIAS, TON EPIKOINONION KAI TIS GNOSIS     & ISI  & GREECE   \\ \hline
+        3  & UNIVERSITA DEGLI STUDI DI CAGLIARI                & UNICA  & ITALY    \\ \hline
+        4  & PANEPISTIMIO PATRON               & UPatras  & GREECE    \\ \hline
+        5  & SIEMENS AKTIENGESELLSCHAFT                & SIE  & GERMANY    \\ \hline
+        6  & AEGIS IT RESEARCH GMBH                & AEGIS  & GERMANY \\ \hline
+        7  & TELEFONICA INNOVACION DIGITAL SL                & TID  & SPAIN  \\ \hline
+        8  & UNIVERSITA DI PISA                & UNIPI  & ITALY   \\ \hline
+        9  & SECURITY LABS CONSULTING LIMITED                & SLC   & IRELAND   \\ \hline
+        10 & AVL LIST GMBH               & AVL & AUSTRIA  \\ \hline
+        11 & AVISENSE.AI TECHNOVLASTOS IKE               & AVI & GREECE  \\ \hline
+        12 & DIINEKES S.I. MONOPROSOPI IDIOTIKI KEFALAIOUCHIKI ETAIREIA    & DIE & GREECE  \\ \hline
+        13 & CYBERALYTICS LIMITED               & CBRL & CYPRUS   \\ \hline
+        14 & SPHYNX TECHNOLOGY SOLUTIONS AG               & STS & SWITZERLAND   \\ \hline
+        15 & VELEDAR OMAR               & BEVD & AUSTRIA  \\ \hline
+    \end{tabular}
+    \end{center}
+    %\\[1ex]
+    \newpage % This forces a page break before the disclaimer starts
+    {\fontsize{12}{15}\bf\color{hyperrideblue}Disclaimer for Deliverables}\\[2ex] 
+	{\small     This document is issued within the frame and for the purpose of the  \hyperride{} project. This project has received funding from the European Union’s Horizon Europe Framework Programme (HORIZON) under Grant Agreement No. 101168560. The opinions expressed and arguments employed herein do not necessarily reflect the official views of the European Commission. 
+
+    The dissemination of this document reflects only the author’s view and the European Commission is not responsible for any use that may be made of the information it contains. \textcolor{red}{This deliverable is subject to final acceptance by the European Commission.} 
+
+    This document and its content are the property of the  \hyperride{} Consortium. The content of all or parts of this document can be used and distributed provided that the  \hyperride{} project and the document are properly referenced. 
+
+    Each  \hyperride{} Partner may use this document in conformity with the  \hyperride{} Consortium Grant Agreement provisions. }\\[1ex]
+
+	% \renewcommand{\doclicenseLongText}{\textcopyright~\the\year~by the authors, the \hyperride{} Consortium. \doclicenseText}
+
+	% {\fontsize{12}{15}\bf\color{hyperrideblue}Copyright Notice}\\[2.0ex] 
+	% \ifthenelse{\equal{\deliv@disslevel}{PU}}
+	% {\vspace*{-3.0ex}\small\doclicenseLicense}
+	% {\small\textcopyright~\the\year~by the authors, the \hyperride{} Consortium.}
+}
+
+  
+\def\ProjectRefNo#1{\gdef\proj@ref@no{#1}}
+\def\ProjectFP#1{\gdef\proj@fp{#1}}
+\def\ProjectAcronym#1{\gdef\proj@acronym{#1}}
+\def\ProjectFullTitle#1{\gdef\proj@title{#1}}
+\def\ProjectInstrument#1{\gdef\proj@instrument{#1}}
+\def\ProjectStartDuration#1{\gdef\proj@start@duration{#1}}
+\def\Security#1{\gdef\deliv@security{#1}}
+\def\ContractualDate#1{\gdef\deliv@contrdate{#1}}
+\def\ActualDate#1{\gdef\deliv@actdate{#1}}
+\def\delivNumber#1{\gdef\deliv@number{#1}}
+\def\delivName#1{\gdef\deliv@name{#1}}
+\def\doiNumber#1{\gdef\doi@number{#1}}
+\def\delivShortTile#1{\gdef\deliv@stitle{#1}}
+\def\delivType#1{\gdef\deliv@type{#1}}
+\def\delivStatus#1{%
+  %\StrLeft{#1}{1}[\firstchar]%
+  %\edef\temparg{\firstchar}%
+  \substring[e]{#1}{1}{2}
+  \def\temparg{\thestring}%
+  \edef\tempf{\detokenize{f}}% final
+  \edef\temps{\detokenize{s}}% submitted
+  \if\temparg\tempf%
+  {\gdef\deliv@status{final}%
+    \gdef\deliv@status@table{(~~~) draft, (\deliv@checkmark) final, (~~~) submitted}}
+  \else %
+    \if\temparg\temps%
+     {\gdef\deliv@status{submitted}%
+       \gdef\deliv@status@table{(~~~) draft, (~~~) final, (\deliv@checkmark) submitted}}
+     \else
+     {\gdef\deliv@status{draft}%
+       \gdef\deliv@status@table{(\deliv@checkmark) draft, (~~~) final, (~~~) submitted}}
+     \fi
+  \fi%
+  % \ifthenelse{\equal{#1}{f}}%\or\equal{\lowercase{#1}}{\string final}}%
+  % {\gdef\deliv@status{final}%
+  %  \gdef\deliv@status@table{\_ draft, $\underline{\checkmark}$ final, \_ submitted (tick one)}}%
+  %  {\gdef\deliv@status{\lowercase{#1}}%
+  %   \gdef\deliv@status@table{$\underline{\checkmark}$ draft, \_ final, \_ submitted (tick one)}}%
+}
+\def\delivVersion#1{\gdef\deliv@version{#1}}
+\def\NumberOfPages#1{\gdef\deliv@pages{#1}}
+\def\delivMonth#1{\gdef\deliv@month{#1}}
+\def\delivYear#1{\gdef\deliv@year{#1}}
+\def\delivDissLevel#1{\gdef\deliv@disslevel{#1}}
+
+\def\delivWP#1{\gdef\deliv@wp{#1}}
+\def\delivWPName#1{\gdef\deliv@wpname{#1}}
+\def\delivTask#1{\gdef\deliv@task{#1}}
+\def\delivResponsible#1{\gdef\deliv@owner{#1}}
+\def\delivOtherContributors#1{\gdef\deliv@others{#1}}
+\def\delivAuthor#1{\gdef\deliv@authors{#1}\author{#1}}
+\def\delivFPAuthor#1{\gdef\deliv@FPauthors{#1}\author{#1}}
+\def\delivReviewers#1{\gdef\deliv@revier{#1}\author{#1}} %%%reviewer
+\def\delivProjectOfficer#1{\gdef\deliv@officer{#1}}
+\def\delivKeywords#1{\gdef\deliv@keywords{#1}}
+\def\delivAbstract#1{\gdef\deliv@abstract{#1}}
+\def\delivExecSummary#1{\gdef\deliv@abstract{#1}}
+\def\delivExecSummary#1{\gdef\deliv@abstract{#1}}
+
+\newcounter{@changecount}
+\setcounter{@changecount}{0}
+\newcounter{@row}
+\newcommand{\istChange}[4]{
+  \stepcounter{@changecount}%
+  \expandafter\xdef\csname%
+  @changedate\arabic{@changecount}\endcsname{#1}
+  \expandafter\xdef\csname%
+  @changeversion\arabic{@changecount}\endcsname{#2}
+  \expandafter\xdef\csname%
+  @changeauthor\arabic{@changecount}\endcsname{\detokenize{#3}}
+  \expandafter\xdef\csname%
+  @changesummary\arabic{@changecount}\endcsname{\detokenize{#4}}
+}
+
+%%% Headers and footers
+
+\renewcommand{\headrulewidth}{0pt}
+\lhead{\fancyplain{}{}}
+\chead{\fancyplain{}{
+	\begin{tabular}{m{0.3\linewidth} m{0.44\linewidth} m{0.25\linewidth}}
+		{\footnotesize CoEvolution GA No. 101168560} & %GA No. 101168560
+		%\centering{\footnotesize{\deliv@stitle}} 
+		& 
+		\makebox[0.24\textwidth][r]{\includegraphics[width=0.40\linewidth]{graphics/hyperride-logo}} \\
+		\hline
+	\end{tabular}
+}}
+\rhead{\fancyplain{}{}}
+\lfoot{\fancyplain{}{}}
+\cfoot{\fancyplain{}{
+	\begin{tabular}{m{0.65\linewidth} m{0.08\linewidth} m{0.65\linewidth}}
+%		\hline
+		{\footnotesize Deliverable \deliv@number: \deliv@name} & % \deliv@name
+		\ifx\doi@number\empty
+		\else
+		\centering {\footnotesize doi:\href{https://doi.org/\doi@number}{\doi@number}} 
+		\fi
+		& 
+		\makebox[0.24\textwidth][r]{\footnotesize{\thepage{} of \pageref{LastPage}}} \\
+	\end{tabular}
+}}
+\rfoot{\fancyplain{}{}}
+
+% Some reasonable defaults. 
+
+\Security{??}
+\ContractualDate{}
+\ActualDate{\today{}}
+\delivNumber{Dn.n}
+\delivName{??}
+\delivType{??}
+
+\delivWP{??}
+\delivWPName{??}
+\delivResponsible{??}
+\delivOtherContributors{??}
+\delivAuthor{??}
+\delivProjectOfficer{??}
+\delivKeywords{??}
+\delivAbstract{??}
+
+\ProjectRefNo{101168560}
+\ProjectAcronym{CoEvolution}
+\ProjectFullTitle{A Comprehensive Trustworthy Framework for Connected
+Machine Learning and Secure Interconnected AI Solutions}
+\Security{Restricted}
+\ContractualDate{\_\_\_\_ \_\_\_\_\_ 202\_}
+\delivMonth{Month}
+\delivYear{202x}
+\ActualDate{\_\_\_\_\_\_ 202\_}
+\delivNumber{Dn.n}
+\delivName{[Title as appears in the DoA]}
+\delivShortTile{Report Short Title Here}
+\delivDissLevel{PP}
+\delivType{[Report, Prototype, Other]}
+\delivStatus{d}
+\delivWP{WPx} % Workpackage x
+\delivWPName{[Title as appears in DoA]} % WP name
+\delivResponsible{[Responsible partner]} 
+\delivOtherContributors{[List of partners contributed to the deliverable]} 
+\delivVersion{\today}
+\delivAuthor{[List of individuals contributed to the deliverable]}
+\delivReviewers{[List of reviewers contributed to the deliverable]}
+\delivFPAuthor{...}
+
+\delivOtherContributors{All partners}
+\delivProjectOfficer{Project officer}
+
+\delivKeywords{[List of free keywords relevant to the deliverable]}
+
+\delivDissLevel{CO}
+\delivTask{Tn.n}
+\delivVersion{0.0}
+\NumberOfPages{\pageref{LastPage(excluding front matter)}}
+
+\newcommand{\istTestDisseminationLevel}[1]{%
+  \ifthenelse{\equal{\deliv@disslevel}{#1}}
+  {~~\checkmark}
+  {}
+}
+
+%% Stuff for other than in the identification page
+
+\def\partners#1{\gdef\proj@partners{#1}}
+\def\webAddress#1{\gdef\proj@web{#1}}
+\def\principalContact#1{\gdef\proj@contact{#1}}
+\def\logo#1{\gdef\proj@logo{#1}}
+
+\endinput

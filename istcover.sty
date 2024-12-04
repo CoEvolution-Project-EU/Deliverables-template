@@ -1,0 +1,126 @@
+%% istcover.sty
+%%
+%% Cover page for CoEvfolution deliverables
+
+%%
+%% makefront
+%% Frontpage content
+%%
+\def\makefront{
+  \newpage
+  \newgeometry{top=11.5mm,left=8.5mm,right=15mm,bottom=-14mm}
+  % shadowed frame
+  \ThisCenterWallPaper{1}{graphics/hyperride-coverbkg}
+  %	\global\@topnum\z@ % prevents figures from going at top of page
+  \thispagestyle{empty} % so we get no page number on title page
+  \setcounter{footnote}{0}
+  
+  \begingroup
+  % \renewcommand{\shadowsize}{2pt}
+  % \renewcommand{\shadowsize}{1pt}
+  % \shadowbox{%
+  % \begin{minipage}{\textwidth}
+  % redefine \@makefnmark so footnote marks take zero space
+  % (this make centering look better)
+  \def\thefootnote{\fnsymbol{footnote}}
+  \def\@makefnmark{\hbox to 0pt{$^{\@thefnmark}$\hss}}
+  \null
+  
+  % Titles block
+  \vspace*{64mm}
+  \hspace*{14mm}
+  \begin{minipage}{.85\linewidth}
+	\begin{center}
+		{\fontsize{16}{20}\bf \color{hyperrideblue} A Comprehensive Trustworthy Framework for Connected Machine Learning and Secure Interconnected AI Solutions} \\[10ex]
+    	\textit{Work Package \deliv@wp} \\[.6ex]
+    	{\fontsize{14}{16}\bf \deliv@wpname} \\[10ex]
+    	\textit{Deliverable \deliv@number} \\[.6ex]
+		{\fontsize{14}{16}\bf \deliv@name} \\[10ex]    	
+    \end{center}
+  \end{minipage}
+
+	\begin{textblock*}{1.00\linewidth}(3.30cm,18.5cm)
+		\begin{tabular}{p{.21\linewidth}p{.64\linewidth}}
+            \textit{Project Acronym:} & CoEvolution \\
+            \textit{Grant agreement No:} & 101168560 \\
+			\textit{Funding Scheme:} & HORIZON Research and Innovation Actions \\
+			\textit{Call:} & HORIZON-CL3-2023-CS-01 \\
+			\textit{Call Topic:} & HORIZON-CL3-2023-CS-01-03 - Security of robust AI systems  \\
+			& \\
+			\textit{Project Start:} & 1 November 2024 \\
+			\textit{Project Duration:} & 36 months \\
+			& \\
+			\textit{Lead Participant:} & \deliv@owner \\
+			& \\
+			\ifx\doi@number\empty
+			\else
+			%\textit{Document Identifier:} & doi:\href{https://doi.org/\doi@number}{\doi@number}
+			\fi 
+			\\
+		\end{tabular} 	
+	\end{textblock*}
+
+	% \begin{textblock*}{0.85\linewidth}(2.50cm,23.4cm)	
+	% 	{\fontsize{9}{11}\selectfont
+	%   	\setlength{\parindent}{0pt}
+	% 	\def\arraystretch{1.25}			
+	% 	\arrayrulecolor{hyperridegray}
+	% 		\begin{tabular}[t]{!{\color{hyperridegray}\vrule}p{4em}!{\color{hyperridegray}\vrule}p{.8\linewidth}!{\color{hyperridegray}\vrule}p{2em}!{\color{hyperridegray}\vrule}}
+	% 			\rowcolor{hyperridegray}\multicolumn{3}{c}
+	% 			{\rule{0pt}{2.5ex}\color{white}\bf Dissemination Level \rule[-1ex]{0pt}{2.5ex}}
+	% 			\\
+	% 			\rowcolor{white}
+	% 			PU & Public, fully open (Deliverables flagged as public will be automatically published in CORDIS project's page) & \istTestDisseminationLevel{PU} \\
+	% 			\rowcolor{hyperridelightergray}
+	% 			SEN &   Sensitive, limited under the conditions of the Grant Agreement
+	% 			& \istTestDisseminationLevel{SEN} \\
+	% 			\hline
+	% 		\end{tabular}
+	% 	}
+	% \end{textblock*}
+
+
+  \endgroup
+
+  \clearpage
+  \restoregeometry
+  % reset footnote counter
+  \setcounter{footnote}{0}
+  % clean up title page macros
+  % Not yet!
+  % \let\maketitle\relax
+  % \gdef\@thanks{}\gdef\@author{}\gdef\@title{}
+  % \gdef\@funding{}\gdef\@techrepdept{}\gdef\@techrepname{}\gdef\@techrepnum{}
+  % \let\thanks\relax
+
+  % margins
+}
+%end of makefront
+
+
+%%
+%% \makeback
+%% Back page of the cover
+%% 
+\def\makeback{
+	\clearpage
+	\newgeometry{a4paper,top=2.50cm,left=2.50cm,right=2.50cm,bottom=3.30cm,headsep=0.50cm,footskip=-0.77cm}	
+	\vspace*{-0.05cm}
+	\istdis	  %%%%% see istprog.sty
+    \istmakechangelog
+}
+
+%%
+%% \makecover
+%% cover page (front + back)
+%%
+\def\makecover{
+	\makefront
+	\makeback
+}
+
+\newcommand\Thickvrule[1]{%
+	\multicolumn{1}{!{\vrule width 2pt}c!{\vrule width 1pt}}{#1}%
+}
+
+\endinput
