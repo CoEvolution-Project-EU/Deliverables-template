@@ -16,9 +16,9 @@ Use the following macros to provide the required information in the deliverable 
 - `\ActualDate{}`: Date of submission.
 - `\delivDissLevel{}`: Dissemination level (PU or SEN).
 - `\delivType{}`: Type of deliverable: Report, Data Management Plan, Demonstrator, or Other.
-- `\delivAuthor{}`: Name(s) of the Deliverable Leader(s) (also participant short name(s)).
-- `\delivFPAuthor{}`: Names of co-authors (also participants short names).
-- `\delivReviewers{}`: Names of reviewers (also participants short names).
+- `\delivAuthor{}`: Name(s) of the Deliverable Leader(s) (participant short name(s)).
+- `\delivFPAuthor{}`: Names of co-authors (participants short names).
+- `\delivReviewers{}`: Names of reviewers (participants short names).
 - `\delivStatus{}`: Status: (d)raft, (f)inal, or (s)ubmitted.
 - `\delivKeywords{}`: List of free keywords relevant to the deliverable.
 - `\istChange{}{}{}{}`: For setting deliverable revisions. Arguments: date, version number, author's name, and summary of changes.
@@ -37,3 +37,10 @@ Use the following macros to provide the required information in the deliverable 
 4. **Note**  
    If you want to exclude a section (e.g., the appendices), comment out the corresponding loader in the `deliverables.tex` file.  
    **Example**: Comment the `\input{sections/appendix-a}` line in the `deliverables.tex` file, and Appendix-A will disappear from the PDF.
+
+
+## Important!
+
+### Overleaf settings:
+- Compiler: pdfLaTex
+- TeX Live version: 2020 (Legacy)
