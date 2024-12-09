@@ -124,16 +124,15 @@ An example table using the \LaTeX\ table feature is shown below (\Cref{tab:latex
 	\centering
 	\caption{Summary of properties of different modelling formalisms. The table below is produced using \LaTeX's {\tt table} environment.}
 	\label{tab:latextable}
-	\begin{tabular}{cccccc}
+	\begin{tabular}{|c|c|c|c|c|c|}
 		\hline
 		\rowcolor{gray!30} % Adds a light gray background to the header row
-		& Static & Discrete & Deterministic & Qualitative & Coarse \\
+		& Static & Discrete & Deterministic & Qualitative & Coarse \\ 
 	    \hline
-	    DG & s &  & d & ql & c \\
-	    BYN & s & d,c & s & qn & c\\
-	    BNN & d & d & d & ql & c\\
-	    GLN & d & c & d & qn & a,f\\
-		\hline
+	    DG & s &  & d & ql & c \\ \hline
+	    BYN & s & d,c & s & qn & c\\ \hline
+	    BNN & d & d & d & ql & c\\ \hline
+	    GLN & d & c & d & qn & a,f\\ \hline
 	\end{tabular}
 \end{table}
 
@@ -146,6 +145,31 @@ Ensure that cross-references to tables are correct before submitting the deliver
 To cross-reference a table, first create the table using the LaTeX table feature, then use the \texttt{\textbackslash Cref\{\}} command to reference it.
 
 In order to cross-reference a table, you must first add a \texttt{label} to the table. To add a label, use the \texttt{\textbackslash label\{\}} command (see the example table above).
+
+
+Below is another table illustrated as an example, which uses specific column width dimensions. The table is structured with the following column widths: 6.5 cm for the second column, 3.8 cm for the third column, and 2.2 cm for the fourth column. This format can be used as a reference for structuring similar tables.
+
+\begin{table}[htb]
+	\centering
+	\caption{CoEvolution Work Package Leaders}
+	\label{tab:work_package_leaders}
+       \begin{tabular}{|l|>{\raggedright}p{6.5cm}|p{3.8cm}|p{2.2cm}|}
+		\hline
+		\rowcolor{gray!30} % Adds a light gray background to the header row
+		No & Name & Leader & Organisation \\
+	    \hline
+    	     WP1 & Project Management & Konstantinos Tserpes & ICCS  \\ \hline
+    	     WP2 & Dissemination, Exploitation, Sustainability  & Andreas Miaoudakis  & CBRL \\ \hline
+    	     WP3 & Specification / Requirements and CoEvolution
+Architecture & Apostolos Fournaris  & ISI \\ \hline
+    	     WP4 & AI model STR Assessment, Enhancement and
+Context Awareness technology enablers & Ioannis Arapakis & TID \\ \hline
+              WP5 & CoEvolution AI model lifecycle STR Security
+Assurance and Monitoring & Sotiris Ioannidis & DIE  \\ \hline
+    	     WP6 & Integration, evaluation and project outcomes & Aris Lalos & AVI \\ \hline
+	\end{tabular}
+\end{table}
+
 
 \subsubsection{Figures}
 \label{sec:figures}
